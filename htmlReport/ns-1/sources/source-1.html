@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Duree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wem.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Duree (com.wem.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Duree</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.6%
+  </span>
+  <span class="absValue">
+    (31/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wem.entities;
+&nbsp;
+&nbsp;public class Duree {
+&nbsp;    private int heures;
+&nbsp;    private int minutes;
+&nbsp;    private int secondes;
+&nbsp;
+&nbsp;    // Constructeur sans arguments
+<b class="fc">&nbsp;    public Duree() {</b>
+<b class="fc">&nbsp;        this.setHeures(0);</b>
+<b class="fc">&nbsp;        this.setMinutes(0);</b>
+<b class="fc">&nbsp;        this.setSecondes(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Constructeur avec arguments
+<b class="fc">&nbsp;    public Duree(int heures, int minutes, int secondes) {</b>
+<b class="fc">&nbsp;        this.setHeures(heures);</b>
+<b class="fc">&nbsp;        this.setMinutes(minutes);</b>
+<b class="fc">&nbsp;        this.setSecondes(secondes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Getters et Setters avec validation
+&nbsp;    public int getHeures() {
+<b class="fc">&nbsp;        return heures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHeures(int heures) {
+<b class="fc">&nbsp;        if (heures &gt;= 0) {</b>
+<b class="fc">&nbsp;            this.heures = heures;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Les heures doivent être positives.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinutes() {
+<b class="fc">&nbsp;        return minutes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMinutes(int minutes) {
+<b class="fc">&nbsp;        if (minutes &gt;= 0 &amp;&amp; minutes &lt; 60) {</b>
+<b class="fc">&nbsp;            this.minutes = minutes;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Les minutes doivent être entre 0 et 59.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSecondes() {
+<b class="fc">&nbsp;        return secondes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSecondes(int secondes) {
+<b class="fc">&nbsp;        if (secondes &gt;= 0 &amp;&amp; secondes &lt; 60) {</b>
+<b class="fc">&nbsp;            this.secondes = secondes;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Les secondes doivent être entre 0 et 59.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Formatte la durée en hh:mm:ss
+&nbsp;    public String formatDuree() {
+<b class="fc">&nbsp;        return String.format(&quot;%02d:%02d:%02d&quot;, getHeures(), getMinutes(), getSecondes());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Affiche la durée
+&nbsp;    public void afficherDuree() {
+<b class="fc">&nbsp;        System.out.println(formatDuree());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Compare deux durées : -1 si this &lt; autre, 0 si égales, 1 si this &gt; autre
+&nbsp;    public int comparer(Duree autre) {
+<b class="fc">&nbsp;        if (this.getHeures() != autre.getHeures()) {</b>
+<b class="fc">&nbsp;            return Integer.compare(this.getHeures(), autre.getHeures());</b>
+<b class="fc">&nbsp;        } else if (this.getMinutes() != autre.getMinutes()) {</b>
+<b class="nc">&nbsp;            return Integer.compare(this.getMinutes(), autre.getMinutes());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return Integer.compare(this.getSecondes(), autre.getSecondes());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Ajoute une seconde à la durée
+&nbsp;    public void nextSeconde() {
+<b class="fc">&nbsp;        this.setSecondes(this.getSecondes() + 1);</b>
+<b class="nc">&nbsp;        if (this.getSecondes() &gt;= 60) {</b>
+<b class="nc">&nbsp;            this.setSecondes(0);</b>
+<b class="nc">&nbsp;            this.nextMinute();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Ajoute une minute à la durée
+&nbsp;    public void nextMinute() {
+<b class="fc">&nbsp;        this.setMinutes(this.getMinutes() + 1);</b>
+<b class="nc">&nbsp;        if (this.getMinutes() &gt;= 60) {</b>
+<b class="nc">&nbsp;            this.setMinutes(0);</b>
+<b class="nc">&nbsp;            this.setHeures(this.getHeures() + 1);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Vérifie si deux durées sont égales
+&nbsp;    public boolean isEquals(Duree autre) {
+<b class="fc">&nbsp;        return this.getHeures() == autre.getHeures() &amp;&amp;</b>
+<b class="fc">&nbsp;                this.getMinutes() == autre.getMinutes() &amp;&amp;</b>
+<b class="fc">&nbsp;                this.getSecondes() == autre.getSecondes();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-11-27 10:10</div>
+</div>
+</body>
+</html>
